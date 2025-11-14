@@ -1,0 +1,115 @@
+#Rankmini{
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 1rem 2rem;
+    width: 30em;
+    text-align: center;
+    box-shadow: 2px 2px 12px rgba(0,0,0,0.1);
+
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+    align-items: center;
+    justify-items: center;
+}
+
+#rank-mini-title{
+    font-size: 30px;
+    margin: 2rem 0 0 0;
+}
+
+.rank-mini-header{
+    margin-bottom: 1rem;
+}
+
+#rank-mini-loadingBox{
+    width: 100%;
+}
+
+#rank-mini-lines{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.rank-mini-line{
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 2px 2px 12px rgba(0,0,0,0.1);
+
+    width: 100%;
+}
+
+.rank-mini-info{
+    margin: 0 0 1rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 15px;
+}
+
+.rank-mini-score{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 0.5rem;
+    padding: 0;
+    margin: 0 .2rem 0 1rem;
+}
+
+.rank-mini-score h3{
+    margin: 1rem 0 0 0;
+}
+
+/* Rank item scores without medals - varying gray shades */
+.rank-mini-score .rank-item-score {
+  background: #666;
+  color: white;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 1rem 0 0 0;
+}
+
+/* With medals - specific colors for top 3 */
+.rank-mini-score.show-medals .rank-item-score.rank-1 {
+  background: #FFD700; /* Gold */
+  color: #000;
+}
+
+.rank-mini-score.show-medals .rank-item-score.rank-2 {
+  background: #C0C0C0; /* Silver */
+  color: #000;
+}
+
+.rank-mini-score.show-medals .rank-item-score.rank-3 {
+  background: #CD7F32; /* Bronze */
+  color: #FFF;
+}
+
+/* Without medals - varying gray shades */
+.rank-mini-score:not(.show-medals) .rank-item-score.rank-1 {
+  background: #333;
+}
+
+.rank-mini-score:not(.show-medals) .rank-item-score.rank-2 {
+  background: #555;
+}
+
+.rank-mini-score:not(.show-medals) .rank-item-score.rank-3 {
+  background: #777;
+}
+
+.rank-mini-score:not(.show-medals) .rank-item-score.rank-4 {
+  background: #999;
+}
+
+.rank-mini-score:not(.show-medals) .rank-item-score.rank-5 {
+  background: #BBB;
+}

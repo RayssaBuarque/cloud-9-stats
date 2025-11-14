@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import CountItem from './components/Count_item/Count-item-component'
+import RankMini from './components/Rank_mini/Rank-mini-component'
 import './App.css'
 
 // Função para ler cookies
@@ -18,12 +19,12 @@ const getCookie = (name: string) => {
 
 
 function App() {
-
   const [membrosCount, setMembrosCount] = useState<number>(0);
+  const [eventosCount, setEventosCount] = useState<number>(0);
+  const [vitoriasCount, setVitoriasCount] = useState<number>(0);
 
   useEffect(() => {
     async function loadData() {
-
       // Se as informações gerais de propriedades da base não estiverem nos cookies do navegador, nós colocamos elas lá.
       if(!getCookie('participantes') && !getCookie('categoria') && !getCookie('resultado') && !getCookie('tipo')){
         try {
@@ -55,9 +56,24 @@ function App() {
         }
       }
 
-      
+      // BUSCAR DADOS DE ANALYTICS PARA EVENTOS E VITÓRIAS
+      try {
+        const analyticsRes = await fetch('http://localhost:4000/api/notion/analytics');
+        const analyticsData = await analyticsRes.json();
+        
+        console.log('Dados de analytics:', analyticsData);
+        
+        // Atualizar os states com os dados do analytics
+        if (analyticsData.summary) {
+          setEventosCount(analyticsData.summary.totalEvents || 0);
+          setVitoriasCount(analyticsData.summary.totalVictories || 0);
+        }
+      } catch (error) {
+        console.error("Erro ao buscar analytics:", error);
+      }
     }
-   loadData();
+
+    loadData();
 
    setMembrosCount(getCookie('participantes') ? getCookie('participantes').multi_select.options.length : 0);
   }, []);
@@ -68,13 +84,19 @@ function App() {
       <div>
         <div className='count-bar'>
           <div className='count-items'>
-            <CountItem title="Eventos" count="X"/>
-            <CountItem title='Vitórias' count="Y"/>
+            <CountItem title="Eventos" count={eventosCount}/>
+            <CountItem title='Vitórias' count={vitoriasCount}/>
             <CountItem title='Membros' count={membrosCount}/>
           </div>
         </div>
 
         <h1>Cloud 9 Stats</h1>
+
+        <RankMini 
+          title="🏆 Top 5 Nuvens-nove"
+          maxItems={5}
+          showMedals={true}
+        />      
 
 
 
